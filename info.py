@@ -9,13 +9,13 @@ API_ID = int(environ.get('API_ID', '28217539'))
 API_HASH = environ.get('API_HASH', 'bc8b8ac22abd8b6e8b8c994f673fc1bd')
 
 # Bot Token, This Is Main Bot
-BOT_TOKEN = environ.get('BOT_TOKEN', "7891831944:AAEcu_zfMjmpknfR6HpJoZ0vCM3iBBW0-gQ")
+BOT_TOKEN = environ.get('BOT_TOKEN', "")
 
 # Admin Telegram Account Id For Withdraw Notification Or Anything Else
 ADMIN = int(environ.get('ADMIN', '1133949754'))
 
 # Back Up Bot Token For Fetching Message When Floodwait Comes
-BACKUP_BOT_TOKEN = environ.get('BACKUP_BOT_TOKEN', "6763173616:AAEkgmLi4jyV2WYiF2ApJDRdcoqCTrDUd1c")
+BACKUP_BOT_TOKEN = environ.get('BACKUP_BOT_TOKEN', "")
 
 # Log Channel, In This Channel Your All File Stored.
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002137297543'))
