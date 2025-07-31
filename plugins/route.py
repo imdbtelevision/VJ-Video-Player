@@ -115,31 +115,34 @@ async def stream_handler(request: web.Request):
 
 @routes.post('/click-counter')
 async def handle_click(request):
-    data = await request.json()  # Get the JSON body
-    user_id = int(data.get('user_id'))  # Extract user_id from the request
-    today = datetime.now().strftime('%Y-%m-%d')
+    try:
+        data = await request.json()  # Get the JSON body
+        user_id = int(data.get('user_id'))  # Extract user_id from the request
+        today = datetime.now().strftime('%Y-%m-%d')
 
-    user_agent = request.headers.get('User-Agent')
-    is_chrome = "Chrome" in user_agent or "Google Inc" in user_agent
+        user_agent = request.headers.get('User-Agent')
+        is_chrome = "Chrome" in user_agent or "Google Inc" in user_agent
 
-    if is_chrome:
-        visited_cookie = request.cookies.get('visited')
-    else:
-        return
-
-    if visited_cookie == today:
-        return
-    else:
-        response = web.Response(text="Hello, World!")
-        response.set_cookie('visited', today, max_age=24*60*60)
-        u = get_count(user_id)
-        if u:
-            c = int(u + 1)
-            record_visit(user_id, c)
+        if is_chrome:
+            visited_cookie = request.cookies.get('visited')
         else:
-            c = int(1)
-            record_visit(user_id, c)
-        return response
+            return
+
+        if visited_cookie == today:
+            return
+        else:
+            response = web.Response(text="Hello, World!")
+            response.set_cookie('visited', today, max_age=24*60*60)
+            u = get_count(user_id)
+            if u:
+                c = int(u + 1)
+                record_visit(user_id, c)
+            else:
+                c = int(1)
+                record_visit(user_id, c)
+            return response
+    except:
+        pass
 
 @routes.get('/{short_link}', allow_head=True)
 async def get_original(request: web.Request):
